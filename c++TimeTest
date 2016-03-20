@@ -1,0 +1,46 @@
+//************************************************************************
+//This program illustrates the time savings in using a static
+//local array vs. an automatic local array.
+//************************************************************************
+#include <iostream>
+#include <array>
+#include <chrono>
+using namespace std::chrono;
+using namespace std;
+const unsigned int ARRAY_SIZE = 10000;
+void staticArray();
+void automaticArray();
+int main() {
+    const unsigned int LOOP_COUNT = 10000000;
+
+    //Get current time in milliseconds since 1/1/1970
+    milliseconds staticStartTime = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
+    for(unsigned int i=0; i<LOOP_COUNT; i++) {
+        staticArray();
+    }
+    //Display time elapsed in milliseconds
+    cout << "Using static local array elapsed time = "
+             << (duration_cast< milliseconds >(system_clock::now().time_since_epoch()) - staticStartTime).count()
+             << " milliseconds." << endl;
+
+    //Get current time in milliseconds
+    milliseconds automaticStartTime = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
+    for(unsigned int i=0; i<LOOP_COUNT; i++) {
+        automaticArray();
+    }
+    //Display time elapsed
+    cout << "Using automatic local array elapsed time = "
+             << (duration_cast< milliseconds >(system_clock::now().time_since_epoch()) - automaticStartTime).count()
+             << " milliseconds." << endl;
+    return 0;
+}
+
+void staticArray() {
+    static array<int, ARRAY_SIZE> array1 = {1,2,3,4,5};  //Static local array
+    array1[3] = 444;     //pointless instruction
+}
+
+void automaticArray() {
+    array<int, ARRAY_SIZE> array2 = {1,2,3,4,5};   //Automatic local array
+    array2[3] = 30;       //pointless instruction
+}
