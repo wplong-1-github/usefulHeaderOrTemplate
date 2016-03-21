@@ -1,0 +1,21 @@
+// Use std::getline:
+
+int main()
+{
+   std::string name, title;
+
+   std::cout << "Enter your name: ";
+   std::getline(std::cin, name);
+
+   std::cout << "Enter your favourite movie: ";
+   std::getline(std::cin, title);
+
+   std::cout << name << "'s favourite movie is " << title;
+}
+
+// Note that this is not the same as std::istream::getline, which works with C-style char buffers rather than std::strings.
+// Update
+
+// Your edited question bears little resemblance to the original.
+
+// You were trying to getline into an int, not a string or character buffer. The formatting operations of streams only work with operator<< and operator>>. Either use one of them (and tweak accordingly for multi-word input), or use getline and lexically convert to int after-the-fact.
