@@ -1,0 +1,2 @@
+// bash lynda notes
+touch file_{1..1000}
