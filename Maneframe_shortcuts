@@ -1,0 +1,2 @@
+srun -p workshop --x11=first --pty $SHELL
+srun -p serial --exclusive --x11=first -E --pty /bin/bash
